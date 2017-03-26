@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class PhoneDialerActivity extends AppCompatActivity {
 
@@ -89,6 +90,16 @@ public class PhoneDialerActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                     break;
+                case R.id.contacts_image_button:
+                    String phoneNumber = phoneNumberEditText.getText().toString();
+                    if (phoneNumber.length() > 0) {
+                        Intent intent = new Intent("ro.pub.cs.systems.eim.lab04.contactsmanager.intent.action.ContactsManagerActivity");
+                        intent.putExtra("ro.pub.cs.systems.eim.lab04.contactsmanager.PHONE_NUMBER_KEY", phoneNumber);
+                        startActivityForResult(intent, Constants.CONTACTS_MANAGER_REQUEST_CODE);
+                    } else {
+                        Toast.makeText(getApplication(), getResources().getString(R.string.phone_error), Toast.LENGTH_LONG).show();
+                    }
+                    break;
                 case R.id.hangup_image_button:
                     finish();
                     break;
@@ -116,6 +127,7 @@ public class PhoneDialerActivity extends AppCompatActivity {
         Button diezButton = (Button)findViewById(R.id.diez_button);
         ImageButton backspaceButton = (ImageButton)findViewById(R.id.backspace_image_button);
         ImageButton callButton = (ImageButton)findViewById(R.id.call_image_button);
+        ImageButton contactsButton = (ImageButton)findViewById(R.id.contacts_image_button);
         ImageButton hangupButton = (ImageButton)findViewById(R.id.hangup_image_button);
 
         zeroButton.setOnClickListener(dialOnClickListener);
@@ -132,6 +144,7 @@ public class PhoneDialerActivity extends AppCompatActivity {
         diezButton.setOnClickListener(dialOnClickListener);
         backspaceButton.setOnClickListener(dialOnClickListener);
         callButton.setOnClickListener(dialOnClickListener);
+        contactsButton.setOnClickListener(dialOnClickListener);
         hangupButton.setOnClickListener(dialOnClickListener);
     }
 }

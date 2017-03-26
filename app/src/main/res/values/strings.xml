@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PhoneDialer</string>
+
+    <string name="phone_error">Must have a number typed to start the Contact Manager!</string>
 </resources>
